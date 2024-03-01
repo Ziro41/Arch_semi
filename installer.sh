@@ -4,7 +4,7 @@
 
 echo "Enter the name of the disk"
 read disk
-if  [[ ! $(fdisk -l |  grep -q $disk) ]]; 
+if  [[  $(fdisk -l |  grep  $disk) ]]; 
 then 
 	echo "The disk couldn't be found"
 	exit 1;
