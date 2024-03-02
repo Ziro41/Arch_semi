@@ -12,13 +12,12 @@ fi
 
 fdisk $disk
 wait
-mkfs.ext4 /dev/root
-mkfs.fat -F 32 /dev/efi
+mkfs.ext4 ($disk)2
+mkfs.fat -F 32 ($disk)1
 wait
-mount /dev/root /mnt
-mount --mkdir /dev/efi /mnt/boot
+mount ($disk)2 /mnt
+mount --mkdir ($disk)1 /mnt/boot
 wait
-pacstrap -K /mnt base linux linux-firmware vim grub 
-
+pacstrap -K /mnt base base-devel linux linux-firmware linux-header pipewire  mesa vim grub mtools sudo openssh networkmanager efibootmgr bluez bluez-utils xf86-video-intel xorg lightdm lightdm-gtk-greeter
 gensfstab -U /mnt >> /mnt/etc/fstab
  
