@@ -20,4 +20,19 @@ mount --mkdir ($disk)1 /mnt/boot
 wait
 pacstrap -K /mnt base base-devel linux linux-firmware linux-header pipewire  mesa vim grub mtools sudo openssh networkmanager efibootmgr bluez bluez-utils xf86-video-intel xorg lightdm lightdm-gtk-greeter
 genfstab -U /mnt >> /mnt/etc/fstab
+
+chroot /mnt bin/bash << "EOF"
+ln -sf /usr/share/America/Argentina/Buenos_Aires /etc/localtime
+hwclock --systohc
+vim /etc/locale.gen
+wait
+locale-gen
+echo "LANG=es_UTF-8" > /etc/locale.conf
+echo "KEYMAP=es" > /etc/vconsole.conf
+echo "Zarch" >/etc/hostname
+passwd
+wait
+useradd -m -f users -G ziro
+passwd ziro
+wait
  
