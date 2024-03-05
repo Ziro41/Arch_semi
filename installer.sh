@@ -21,7 +21,7 @@ wait
 pacstrap -K /mnt base base-devel linux linux-firmware vim
 genfstab -U /mnt >> /mnt/etc/fstab
 cp "${directory}/chroot.sh" /mnt/chroot.sh
-arch-chroot /mnt /chroot.sh
+arch-chroot /mnt /bin/bash /chroot.sh
 wait 
 rm /mnt/chroot.sh
 echo "Done" 
