@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-
+directory=$(pwd)
 echo "Enter the name of the disk"
 read disk
 if   $(fdisk -l |  grep  $disk); 
@@ -20,5 +20,9 @@ mount --mkdir "${disk}1" /mnt/boot
 wait
 pacstrap -K /mnt base base-devel linux linux-firmware vim
 genfstab -U /mnt >> /mnt/etc/fstab
-chroot /mnt ./chroot.sh 
+cp "${directory}/chroot.sh" /mnt/chroot.sh
+arch-chroot /mnt /chroot.sh
+wait 
+rm /mnt/chroot.sh
+echo "Done" 
 
