@@ -12,11 +12,27 @@ fi
 
 fdisk $disk
 wait
-mkfs.ext4 "${disk}2"
+cryptsetup luksFormat --type luks1 /dev/${disk}2
+cryptsetup open /dev/${disk}2 cryptlvm
+pvcreate /dev/mapper/cryptlvm
+vgcreate VolumeGroup /dev/mapper/cryptlvm
+echo "Enter root partition size in Gigabytes"
+read root_size
+wait
+lvcreate -L ${root_size}G VolumeGroup -n root
+lvcreate -l 100%FREE VolumeGroup -n home
+mkfs.ext4 /dev/VolumeGroup/root
+mkfs.ext4 /dev/VolumeGroup/home
 mkfs.fat -F 32 "${disk}1"
 wait
-mount "${disk}2" /mnt
-mount --mkdir "${disk}1" /mnt/boot
+
+mount  /dev/VolumeGroup/root /mnt
+mount  --mkdir /dev/VolumeGroup/root /mnt/home
+mount --mkdir "${disk}1" /mnt/efi
+
+
+
+
 wait
 pacstrap -K /mnt base base-devel linux linux-firmware vim
 genfstab -U /mnt >> /mnt/etc/fstab
