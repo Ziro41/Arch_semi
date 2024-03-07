@@ -19,7 +19,7 @@ wait
 vim /etc/mkinitcpio.conf
 wait
 mkinitcpio -P
-blkid -s UUID -o value /dev/sda2  >> /etc/default/grub
+blkid -s UUID -o value /dev/sda3  >> /etc/default/grub
 vim /etc/default/grub
 wait
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
