@@ -18,8 +18,7 @@ EDITOR=vim visudo
 wait
 vim /etc/mkinitcpio.conf
 wait
-#This is hardcode find some workaround later"
-blkid /dev/sda2 -s UUID >> /etc/default/grub
+cat /lvmUUID.txt  >> /etc/default/grub
 vim /etc/default/grub
 wait
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
