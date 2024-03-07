@@ -4,7 +4,7 @@ vim /etc/locale.gen
 wait
 locale-gen
 pacman -Syu
-pacman -S linux-headers pipewire mesa grub mtools sudo openssh networkmanager efibootmgr bluez bluez-utils xf86-video-intel xorg lightdm lightdm-gtk-greeter
+pacman -S linux-headers pipewire mesa grub mtools sudo openssh networkmanager efibootmgr bluez bluez-utils xf86-video-intel xorg lightdm lightdm-gtk-greeter lvm2 
 echo "LANG=es_AR.UTF-8" >> /etc/locale.conf
 echo "KEYMAP=es" >> /etc/vconsole.conf
 echo "Zarch" >> /etc/hostname
@@ -16,7 +16,10 @@ passwd ziro
 wait
 EDITOR=vim visudo
 wait
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+vim /etc/mknitcpio.conf
+vim /etc/default/grub
+wait
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 systemctl enable NetworkManager
 systemctl enable bluetooth
