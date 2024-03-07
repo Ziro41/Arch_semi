@@ -17,6 +17,7 @@ wait
 EDITOR=vim visudo
 wait
 vim /etc/mkinitcpio.conf
+wait
 vim /etc/default/grub
 wait
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck

@@ -30,7 +30,7 @@ mkfs.fat -F 32 "${disk}1"
 wait
 
 mount  /dev/VolumeGroup/root /mnt
-mount --mkdir /dev/VolumeGroup/root /mnt/home
+mount --mkdir /dev/VolumeGroup/home /mnt/home
 mount --mkdir "${disk}1" /mnt/efi
 
 
