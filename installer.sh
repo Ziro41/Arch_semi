@@ -12,7 +12,7 @@ fi
 
 gdisk $disk
 wait
-cryptsetup luksFormat --type luks1 ${disk}2
+cryptsetup luksFormat -${disk}2 --type=luks1 
 wait
 cryptsetup open ${disk}2 cryptlvm
 wait
@@ -40,7 +40,6 @@ wait
 pacstrap -K /mnt base base-devel linux linux-firmware vim
 genfstab -U /mnt >> /mnt/etc/fstab
 cp "${directory}/chroot.sh" /mnt/chroot.sh
-bklid ${disk}2 -s UUID > /mnt/lvmUUID.txt
 arch-chroot /mnt /bin/bash /chroot.sh
 wait 
 rm /mnt/chroot.sh
