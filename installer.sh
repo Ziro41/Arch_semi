@@ -23,13 +23,14 @@ read root_size
 wait
 lvcreate -L ${root_size}G VolumeGroup -n root
 lvcreate -l 100%FREE VolumeGroup -n home
+lvreduce -L -256M VolumeGroup/home
 mkfs.ext4 /dev/VolumeGroup/root
 mkfs.ext4 /dev/VolumeGroup/home
 mkfs.fat -F 32 "${disk}1"
 wait
 
 mount  /dev/VolumeGroup/root /mnt
-mount  --mkdir /dev/VolumeGroup/root /mnt/home
+mount --mkdir /dev/VolumeGroup/root /mnt/home
 mount --mkdir "${disk}1" /mnt/efi
 
 
