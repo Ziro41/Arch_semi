@@ -11,12 +11,12 @@ echo "Zarch" >> /etc/hostname
 echo "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\tZarch.localdomain\tZarch" >> /etc/hosts
 passwd
 wait
-useradd -Gm  users  ziro
+useradd -m -g  users -G wheel ziro
 passwd ziro
 wait
 EDITOR=vim visudo
 wait
-vim /etc/mknitcpio.conf
+vim /etc/mkinitcpio.conf
 vim /etc/default/grub
 wait
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
