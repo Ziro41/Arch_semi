@@ -10,10 +10,12 @@ then
 	exit 1;
 fi	
 
-fdisk $disk
+gdisk $disk
 wait
-cryptsetup luksFormat --type luks1 /dev/${disk}2
-cryptsetup open /dev/${disk}2 cryptlvm
+cryptsetup luksFormat --type luks1 ${disk}2
+wait
+cryptsetup open ${disk}2 cryptlvm
+wait
 pvcreate /dev/mapper/cryptlvm
 vgcreate VolumeGroup /dev/mapper/cryptlvm
 echo "Enter root partition size in Gigabytes"
