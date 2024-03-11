@@ -1,0 +1,26 @@
+
+[font]
+
+normal = {family = "JetBrains Mono", style= "Regular"}
+size = 10
+[colors.primary]
+
+foreground = "#F5C7F2"
+background = "#453F59"
+
+[colors.normal]
+
+red = "#FF7F7F"
+black = "#232240"
+cyan = "#BF75B3"
+blue = "#C4EAF2"
+green = "#C6D9B4"
+
+
+[colors.bright]
+
+black = "#ffffff"
+
+[window]
+
+opacity = 0.7
