@@ -12,9 +12,9 @@ fi
 
 gdisk $disk
 wait
-cryptsetup luksFormat --type luks1 ${disk}3
+cryptsetup luksFormat ${disk}2
 wait
-cryptsetup open ${disk}3 cryptlvm
+cryptsetup open ${disk}2 cryptlvm
 wait
 pvcreate /dev/mapper/cryptlvm
 vgcreate VolumeGroup /dev/mapper/cryptlvm
@@ -26,12 +26,12 @@ lvcreate -l 100%FREE VolumeGroup -n home
 lvreduce -L -256M VolumeGroup/home
 mkfs.ext4 /dev/VolumeGroup/root
 mkfs.ext4 /dev/VolumeGroup/home
-mkfs.fat -F 32 "${disk}2"
+mkfs.fat -F 32 "${disk}1"
 wait
 
 mount  /dev/VolumeGroup/root /mnt
 mount --mkdir /dev/VolumeGroup/home /mnt/home
-mount --mkdir "${disk}2" /mnt/efi
+mount --mkdir "${disk}1" /mnt/boot
 
 
 
