@@ -4,7 +4,7 @@ vim /etc/locale.gen
 wait
 locale-gen
 pacman -Syu
-pacman -S linux-headers alsa pipewire mesa grub mtools sudo openssh networkmanager efibootmgr virtualbox-guest-utils git
+pacman -S linux-headers alsa-utils pipewire mesa grub mtools sudo openssh networkmanager efibootmgr virtualbox-guest-utils git
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "KEYMAP=en" >> /etc/vconsole.conf
 echo "Zarch" >> /etc/hostname
@@ -14,7 +14,7 @@ passwd
 wait
 echo "Enter main user name"
 read user
-useradd -Gm  users $user
+useradd -m -g users -G wheel $user
 echo "Enter user password"
 passwd $user
 wait
